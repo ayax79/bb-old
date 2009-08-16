@@ -1,0 +1,3 @@
+#!/bin/sh
+git submodule foreach 'git config --add branch.origin.remote origin'
+git submodule foreach 'git config --add branch.origin.merge refs/heads/master'
