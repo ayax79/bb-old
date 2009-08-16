@@ -1,0 +1,9 @@
+[submodule "server"]
+	path = server
+	url = git@github.com:/ayax79/server.git
+[submodule "core"]
+	path = core
+	url = git@github.com:/ayax79/core.git
+[submodule "service"]
+	path = service
+	url = git@github.com:/ayax79/service.git
