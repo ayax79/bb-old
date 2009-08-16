@@ -7,3 +7,6 @@
 [submodule "service"]
 	path = service
 	url = git@github.com:/ayax79/service.git
+[submodule "presentation"]
+	path = presentation
+	url = git@github.com:/ayax79/presentation.git
