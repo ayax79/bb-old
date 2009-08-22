@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export oldpwd=`pwd`
+cd ./presentation/src/main/webapp/
+rsync -rtlv --password-file=$oldpwd/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/
