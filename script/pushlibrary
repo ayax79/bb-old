@@ -1,5 +1,8 @@
 #!/bin/sh
 
 export oldpwd=`pwd`
-cd ./presentation/src/main/webapp/
+cd presentation
+mvn -o -P ci-deploy,-default-dataset -Dmaven.test.skip=true clean package
+cd target/presentation-1.0.0-SNAPSHOT
 rsync -rtlv --password-file=$oldpwd/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/
+cd $oldpwd
