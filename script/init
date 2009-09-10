@@ -1,0 +1,7 @@
+#!/bin/sh
+git submodule update --init core
+git submodule update --init server
+git submodule update --init presentation
+git submodule update --init service
+script/tomaster
+

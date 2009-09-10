@@ -1,5 +1,6 @@
 #!/bin/sh
 
+chmod 600 script/pass.txt
 export oldpwd=`pwd`
 cd presentation
 mvn -o -P ci-deploy,-default-dataset -Dmaven.test.skip=true clean package
