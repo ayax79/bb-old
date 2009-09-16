@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# requires the following
+# 1. you have a value for server0,pres0,service0 in your ssh config
+# 2. you have key authentication key enabled in all three hosts
+# 3. there is no file /tmp/{name}.war already or that you can override it
+
+mvn -Pproduction -Dmaven.test.skip=true clean install
+scp server/target/*war server0:/tmp/
+scp presentation/target/*war pres0:/tmp/
+scp service/target/*war service0:/tmp/
