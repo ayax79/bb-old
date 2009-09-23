@@ -1,9 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
-chmod 600 script/pass.txt
-export oldpwd=`pwd`
-cd presentation
-mvn -o -P ci-deploy,-default-dataset -Dmaven.test.skip=true clean package
-cd target/presentation-1.0.0-SNAPSHOT
-rsync -rtlv --password-file=$oldpwd/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/
-cd $oldpwd
+require "rexml/document"
+
+def get_version
+  doc = REXML::Document.new(File.new('presentation/pom.xml'))
+  doc.elements.each("project/version") { |xml| return xml.text }
+end
+
+oldpwd = Dir.pwd
+version = get_version
+system "chmod 600 script/pass.txt"
+Dir.chdir "./presentation"
+system "mvn -o -P ci-deploy,-default-dataset -Dmaven.test.skip=true clean package"
+Dir.chdir "./target/presentation-#{version}"
+system "rsync -rtlv --password-file=#{oldpwd}/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/#{version}"
