@@ -1,2 +1,2 @@
 #!/bin/sh
-git submodule foreach 'git push origin master'
+git submodule foreach "git push $@"
