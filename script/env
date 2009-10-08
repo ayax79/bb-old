@@ -57,13 +57,13 @@ case "$1" in
     "server")
         clear
         env_server $2
-        add_debug 5005
+        add_debug 5006
         alias cdp="cd $SERVER_DIR"
         ;;
     "presentation")
         clear
         env_presentation $2
-        add_debug 5006
+        add_debug 5005
         alias cdp="cd $PRESENTATION_DIR"
         ;;
     "service")
