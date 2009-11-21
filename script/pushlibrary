@@ -11,6 +11,6 @@ oldpwd = Dir.pwd
 version = get_version
 system "chmod 600 script/pass.txt"
 Dir.chdir "./presentation"
-system "mvn -o -P ci-deploy,-default-dataset -Dmaven.test.skip=true clean package"
+system "mvn -o -P jetty,ci-deploy,-default-dataset -Dmaven.test.skip=true clean package"
 Dir.chdir "./target/presentation-#{version}"
 system "rsync -rtlv --password-file=#{oldpwd}/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/#{version}"
