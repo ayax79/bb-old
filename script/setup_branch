@@ -1,0 +1,2 @@
+#!/bin/sh
+git submodule foreach "git checkout -b $1 --track origin/$1"
