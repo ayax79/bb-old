@@ -1,0 +1,1 @@
+git submodule --quiet foreach 'git ls-files --exclude-per-directory=.gitignore --exclude-from=.git/info/exclude  --others  --modified -t'
