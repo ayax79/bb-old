@@ -7,3 +7,5 @@
 *.ids
 *.swp
 .idea
+target
+dbdump.dmp

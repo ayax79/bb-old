@@ -4,20 +4,10 @@ function reloaddb {
 }
 
 function env_server {
-    if [[ ! -z $1 && $1  == 'y' ]]; then
-        export JAVA_REBEL_OPTS=" -Drebel.spring_plugin=true -Drebel.servlet_plugin=true -Drebel.allow_bytecode_proxy=true -javaagent:/Users/andrew/lib/javarebel.jar "
-    else
-        export JAVA_REBEL_OPTS=""
-    fi
     export MAVEN_OPTS=" -ea ${JAVA_REBEL_OPTS} -XX:MaxPermSize=512m -Xmx792m -noverify "
 }
 
 function env_presentation {
-    if [[ ! -z $1 && $1 == 'y' ]]; then
-        export JAVA_REBEL_OPTS="  -Drebel.spring_plugin=true -Drebel.stripes_plugin=true -Drebel.allow_bytecode_proxy=true -javaagent:/Users/andrew/lib/javarebel.jar "
-    else
-        export JAVA_REBEL_OPTS=""
-    fi
     export MAVEN_OPTS=" -ea ${JAVA_REBEL_OPTS} -XX:MaxPermSize=256m -Xmx512m -noverify "
 }
 
@@ -42,15 +32,14 @@ function add_debug {
 
 # clear some variables
 unset MAVEN_OPTS
-unset JAVA_REBEL_OPTS
 unalias cdp
 
-export BLACKBOX_DIR=`pwd`
-export SERVER_DIR="$BLACKBOX_DIR/server"
-export SERVICE_DIR="$BLACKBOX_DIR/service"
-export PRESENTATION_DIR="$BLACKBOX_DIR/presentation"
-export CORE_DIR="$BLACKBOX_DIR/core"
-alias cdb='cd $BLACKBOX_DIR'
+export blackbox=`pwd`
+export server="$blackbox/server"
+export service_DIR="$blackbox/service"
+export presentation="$blackbox/presentation"
+export core="$blackbox/core"
+alias cdb='cd $blackbox'
 
 
 case "$1" in 
@@ -58,27 +47,25 @@ case "$1" in
         clear
         env_server $2
         add_debug 5006
-        alias cdp="cd $SERVER_DIR"
+        alias cdp="cd $server"
         ;;
     "presentation")
         clear
         env_presentation $2
         add_debug 5005
-        alias cdp="cd $PRESENTATION_DIR"
+        alias cdp="cd $presentation"
         ;;
     "service")
         clear
         env_presentation $2
         add_debug 5007
-        alias cdp="cd $PRESENTATION_DIR"
+        alias cdp="cd $presentation"
         ;;
     "core")
         clear
         env_presentation
-        alias cdp="cd $CORE_DIR"
-        ;;
+        alias cdp="cd $core" ;;
     "*")
         echo "WARNING: no project was specified! (presentation,server,service,core)"
         ;;
 esac
-
