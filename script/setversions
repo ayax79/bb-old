@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require "rexml/document"
+require "fileutils"
+
+
+def change_version(file, version)
+  f = File.new file
+  tmp = file + ".tmp"
+  doc = REXML::Document.new f
+  doc.elements.each('project/version') { |e| e.text = version }
+  doc.elements.each('project/properties/blackbox-core.version') { |e| e.text = version }
+  doc.write File.new tmp, 'w'
+  FileUtils.mv tmp, file
+end
+
+if $0 == __FILE__
+
+  change_version('core/pom.xml', ARGV[0])
+  change_version('server/pom.xml', ARGV[0])
+  change_version('presentation/pom.xml', ARGV[0])
+  change_version('service/pom.xml', ARGV[0])
+
+end
