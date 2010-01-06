@@ -5,12 +5,13 @@ require "fileutils"
 
 
 def change_version(file, version)
-  f = File.new file
   tmp = file + ".tmp"
-  doc = REXML::Document.new f
-  doc.elements.each('project/version') { |e| e.text = version }
-  doc.elements.each('project/properties/blackbox-core.version') { |e| e.text = version }
-  doc.write File.new tmp, 'w'
+  File.open(file) do |f|
+    doc = REXML::Document.new f
+    doc.elements.each('project/version') { |e| e.text = version }
+    doc.elements.each('project/properties/blackbox-core.version') { |e| e.text = version }
+    File.open(tmp, 'w') { |tmp_f| doc.write tmp_f }
+  end
   FileUtils.mv tmp, file
 end
 
