@@ -32,6 +32,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>resin-hessian</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.core</artifactId>
             <version>${spring.version}</version>
@@ -365,6 +370,10 @@
             <id>geogoogle</id>
             <name>geogoogle repo</name>
             <url>http://www.cs.drexel.edu/~zl25/maven2/repo</url>
+        </repository>
+        <repository>
+            <id>caucho</id>
+            <url>http://caucho.com/m2</url>
         </repository>
     </repositories>
     <pluginRepositories>
