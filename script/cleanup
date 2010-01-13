@@ -1,0 +1,8 @@
+#!/bin/sh
+git gc
+git fsck
+git prune
+
+git submodule foreach 'git gc'
+git submodule foreach 'git fsck'
+git submodule foreach 'git prune'
