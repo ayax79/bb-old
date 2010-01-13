@@ -3,14 +3,22 @@
 require "rexml/document"
 
 def get_version
-  doc = REXML::Document.new(File.new('presentation/pom.xml'))
-  doc.elements.each("project/version") { |xml| return xml.text }
+  File.open('presentation/pom.xml') do |file|
+    doc = REXML::Document.new(file)
+    return doc.elements.each("project/version") { |xml| return xml.text }
+  end
 end
 
-oldpwd = Dir.pwd
-version = get_version
-system "chmod 600 script/pass.txt"
-Dir.chdir "./presentation"
-system "mvn -P jetty,ci-deploy,-default-dataset,-jspc -Dmaven.test.skip=true clean package"
-Dir.chdir "./target/presentation-#{version}"
-system "rsync -rtlv --password-file=#{oldpwd}/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/#{version}"
+if $0 == __FILE__
+  oldpwd = Dir.pwd
+  version = get_version
+  if ARGV[0] == 'version'
+    puts "Push version will be: " + version
+  else
+    system "chmod 600 script/pass.txt"
+    Dir.chdir "./presentation"
+    system "mvn -P jetty,ci-deploy,-default-dataset,-jspc -Dmaven.test.skip=true clean package"
+    Dir.chdir "./target/presentation-#{version}"
+    system "rsync -rtlv --password-file=#{oldpwd}/script/pass.txt ./library blackbox@rsync.bitgravity.com::blackbox/#{version}"
+  end
+end

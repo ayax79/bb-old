@@ -34,9 +34,9 @@ function add_debug {
 unset MAVEN_OPTS
 unalias cdp
 
-export blackbox=`pwd`
+export blackbox=$PWD
 export server="$blackbox/server"
-export service_DIR="$blackbox/service"
+export service="$blackbox/service"
 export presentation="$blackbox/presentation"
 export core="$blackbox/core"
 alias cdb='cd $blackbox'
