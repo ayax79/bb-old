@@ -21,5 +21,6 @@ if $0 == __FILE__
   change_version('server/pom.xml', ARGV[0])
   change_version('presentation/pom.xml', ARGV[0])
   change_version('service/pom.xml', ARGV[0])
+  change_version('pom.xml', ARGV[0])
 
 end
