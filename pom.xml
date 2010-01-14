@@ -28,8 +28,14 @@
         <infinispan.version>4.0.0.CR1</infinispan.version>
         <stringsearch.version>1.2</stringsearch.version>
         <google-collections.version>1.0-rc2</google-collections.version>
+        <facebookapi.version>3.0.2</facebookapi.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.google.code.facebookapi</groupId>
+            <artifactId>facebook-java-api</artifactId>
+            <version>${facebookapi.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>resin-hessian</artifactId>

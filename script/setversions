@@ -10,6 +10,7 @@ def change_version(file, version)
     doc = REXML::Document.new f
     doc.elements.each('project/version') { |e| e.text = version }
     doc.elements.each('project/properties/blackbox-core.version') { |e| e.text = version }
+    doc.elements.each('project/parent/version') { |e| e.text = version }
     File.open(tmp, 'w') { |tmp_f| doc.write tmp_f }
   end
   FileUtils.mv tmp, file
