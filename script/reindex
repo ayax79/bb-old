@@ -1,0 +1,19 @@
+#!/usr/bin/env groovy
+
+HOME_DIR = System.getProperty("user.home")
+HESSIAN_JAR = System.getProperty("hessian.jar") ?: "${HOME_DIR}/.m2/repository/com/caucho/resin-hessian/3.2.1/resin-hessian-3.2.1.jar"
+CORE_JAR = System.getProperty("core.jar") ?: "${System.getProperty('user.dir')}/core/target/classes"
+SERVER_HOST = System.getProperty("server.host") ?: "http://localhost:8081"
+
+def addToClassPath(path) {
+  def file = new File(path)
+  assert file.exists()
+  this.class.classLoader.rootLoader.addURL(file.toURL())
+}
+addToClassPath(HESSIAN_JAR)
+addToClassPath(CORE_JAR)
+
+def proxyFactory = Class.forName("com.caucho.hessian.client.HessianProxyFactory").newInstance()
+def mgr = proxyFactory.create(Class.forName('com.blackbox.system.IAdminManager'), SERVER_HOST + "/remoting/AdminManager")
+args.each { x -> mgr.reindex(x) }
+
