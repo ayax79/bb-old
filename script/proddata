@@ -4,3 +4,4 @@ createdb -O blackbox blackbox
 unzip -o -d script script/dbdump.zip
 psql blackbox < script/dbdump.dmp
 psql blackbox < script/cleandbdump.sql
+groovy script/migration.groovy
