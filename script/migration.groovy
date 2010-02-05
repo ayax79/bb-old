@@ -18,7 +18,6 @@ def addToClassPath(path) {
 addToClassPath POSTGRES_JAR
 addToClassPath JODA_JAR
 
-sql = Sql.newInstance(JDBC_URL, JDBC_USER, JDBC_PASSWORD, "org.postgresql.Driver")
 sql.metaClass.asTransaction = {c ->
   withTransaction {conn ->
     c.call new Sql(conn)
@@ -137,18 +136,23 @@ tasks.addTask([
 ])
 
 // execute all defined tasks
-tasks.each {task ->
-  if (!isCompleted(task)) {
-    try {
-      task.execute sql
-    }
-    catch (Throwable e) {
-      System.out.println(e.message)
-    }
-    finally {
-      markCompleted task
+sql = Sql.newInstance(JDBC_URL, JDBC_USER, JDBC_PASSWORD, "org.postgresql.Driver")
+try {
+  tasks.each {task ->
+    if (!isCompleted(task)) {
+      try {
+        task.execute sql
+      }
+      catch (Throwable e) {
+        System.out.println(e.message)
+      }
+      finally {
+        markCompleted task
+      }
     }
   }
+} finally {
+  sql.close()
 }
 
 

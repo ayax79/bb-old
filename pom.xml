@@ -23,15 +23,35 @@
         <resteasy.version>1.1.GA</resteasy.version>
         <shiro.version>1.0-20091119</shiro.version>
         <yescache.version>1.1.0</yescache.version>
-        <yespublish.version>1.0.0</yespublish.version>
+        <yespublish.version>1.1.0-SNAPSHOT</yespublish.version>
         <yeslib.version>1.2.0-SNAPSHOT</yeslib.version>
         <compass.version>2.2.0</compass.version>
         <infinispan.version>4.0.0.CR3</infinispan.version>
         <stringsearch.version>1.2</stringsearch.version>
         <google-collections.version>1.0-rc2</google-collections.version>
         <facebookapi.version>3.0.2</facebookapi.version>
+        <yesepisodic.version>1.1.0-SNAPSHOT</yesepisodic.version>
     </properties>
     <dependencies>
+         <dependency>
+            <groupId>org.yestech</groupId>
+            <artifactId>yesepisodic</artifactId>
+            <version>${yesepisodic.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.compass-project</groupId>
             <artifactId>compass</artifactId>
