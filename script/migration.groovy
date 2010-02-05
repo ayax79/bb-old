@@ -18,12 +18,6 @@ def addToClassPath(path) {
 addToClassPath POSTGRES_JAR
 addToClassPath JODA_JAR
 
-sql.metaClass.asTransaction = {c ->
-  withTransaction {conn ->
-    c.call new Sql(conn)
-  }
-}
-
 def isCompleted(task) {
   result = 0
   sql.eachRow("select count(*) as count from bb_db_meta_data where key = ${task.name()}") {row ->
@@ -137,6 +131,13 @@ tasks.addTask([
 
 // execute all defined tasks
 sql = Sql.newInstance(JDBC_URL, JDBC_USER, JDBC_PASSWORD, "org.postgresql.Driver")
+
+sql.metaClass.asTransaction = {c ->
+  withTransaction {conn ->
+    c.call new Sql(conn)
+  }
+}
+
 try {
   tasks.each {task ->
     if (!isCompleted(task)) {
