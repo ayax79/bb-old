@@ -129,6 +129,13 @@ tasks.addTask([
         }
 ])
 
+tasks.addTask([
+        name: {"remove-bb_media-medialibrary_guid"},
+        execute: {sql ->
+          sql.execute 'alter table bb_media_meta_data drop column medialibrary_guid'
+        }
+])
+
 // execute all defined tasks
 sql = Sql.newInstance(JDBC_URL, JDBC_USER, JDBC_PASSWORD, "org.postgresql.Driver")
 
