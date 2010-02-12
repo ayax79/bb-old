@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blackbox</groupId>
     <artifactId>blackbox</artifactId>
-    <version>1.0.0.b16</version>
+    <version>1.0.0.b17</version>
     <packaging>pom</packaging>
     <name>blackbox</name>
     <modules>
@@ -30,6 +30,10 @@
         <google-collections.version>1.0-rc2</google-collections.version>
         <facebookapi.version>3.0.2</facebookapi.version>
         <yesepisodic.version>1.1.0-SNAPSHOT</yesepisodic.version>
+        <ehcache.location>/var/cache/bbr/ehcache</ehcache.location>
+        <oscache.location>/var/cache/bbr/oscache</oscache.location>
+        <compass.index.dir>/var/cache/bbr/lucene</compass.index.dir>
+        <inifinispan.location>/var/cache/bbr/infinispan</inifinispan.location>
     </properties>
     <dependencies>
          <dependency>
