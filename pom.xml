@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blackbox</groupId>
     <artifactId>blackbox</artifactId>
-    <version>1.0.0.b18-SNAPSHOT</version>
+    <version>1.0.0.b19-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blackbox</name>
     <modules>
